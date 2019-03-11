@@ -1,0 +1,44 @@
+---
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+##開啟"
+
+```{r}
+rm(list=ls())
+etf4<-read.table("ETF4_2000_2018_d.txt", header = T , fileEncoding = "UTF-8-BOM")
+head(etf4)
+```
+
+```{r}
+etf4<-read.csv("ETF4_2000_2018_d.csv",  fileEncoding='big5',colClasses = c("證券代碼"="character",'id', 'date', 'price'))
+head(etf4)
+```
+
+```{r}
+library(readr)
+etf4_csv<-read_csv("ETF4_2000_2018_d.csv")
+etf4_csv<-read_csv("ETF4_2000_2018_d.csv", locale = locale(encoding='big5'))
+head(etf4_csv)
+str(etf4_csv)
+```
+
+
+rm(list=ls())
+etf4<-read.table("ETF4_2000_2018_d.txt")
+# you will get error message! This is because Chinese characters that cannot be recognized!
+# But this works fine in Mac!!!
+# But you can add: fileEncoding = 'UTF-8-BOM' to solve the problem!
+etf4<-read.table("ETF4_2000_2018_d.txt", fileEncoding = "UTF-8-BOM")
+head(etf4)
+# Or you can save the .txt as ansi file fromat using notepad
+etf4<-read.table("ETF4_2000_2018_d_ansi.txt", header = T)
+# You will get error message in Mac
+str(etf4)
+# change imoprted data types
+etf4<-read.table("ETF4_2000_2018_d_ansi.txt", header = T, stringsAsFactors = T, 
+                 colClasses = c("證券代碼"="character"))
+str(etf4)
+head(etf4)
